@@ -65,14 +65,7 @@ export default defineComponent({
     const projects = [
         { id: 1, title: 'Zeno', description: 'A budget and account aggregation app', url: 'https://github.com/jemminiz/Zeno' },
         { id: 2, title: 'EZ-Template', description: 'Helped maintain a VEX Robotics template used worldwide', url: 'https://github.com/EZ-Robotics/EZ-Template' },
-        { id: 3, title: 'SPOT', description: 'A Scouting Network used by FRC Team 4472 SuperNOVA, created by 3061 HuskieRobotics', url: 'https://example.com/project-three' },
-        { id: 4, title: 'Project Four', description: 'Description of project four.', url: 'https://example.com/project-four' },
-        { id: 5, title: 'Project Five', description: 'Description of project five.', url: 'https://example.com/project-five' },
-        { id: 6, title: 'Project Six', description: 'Description of project six.', url: 'https://example.com/project-six' },
-        { id: 7, title: 'Project Seven', description: 'Description of project seven.', url: 'https://example.com/project-seven' },
-        { id: 8, title: 'Project Eight', description: 'Description of project eight.', url: 'https://example.com/project-eight' },
-        { id: 9, title: 'Project Nine', description: 'Description of project nine.', url: 'https://example.com/project-nine' },
-        { id: 10, title: 'Project Ten', description: 'Description of project ten.', url: 'https://example.com/project-ten' },
+        { id: 3, title: 'SPOT', description: 'A Scouting Network used by FRC Team 4472 SuperNOVA, created by 3061 HuskieRobotics', url: 'https://github.com/jemminiz/SPOT' },
     ];
 
     const openLink = (url: string) => {
