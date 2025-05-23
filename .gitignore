@@ -1,0 +1,8 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore Vite build output
+dist/
+
+# Ignore gh-pages and other cache directories
+.cache/
