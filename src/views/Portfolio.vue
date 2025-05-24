@@ -51,7 +51,11 @@
         <button @click="openLink('mailto:jonathan.emminizer@yahoo.com')">Email Me</button>
         <button @click="openLink('https://linkedin.com/in/jemminiz')">LinkedIn</button>
         <button @click="openLink('https://github.com/jemminiz')">GitHub</button>
+        <button @click="openLink('https://www.fiverr.com/jemminiz/help-bring-your-application-to-life')">Have a Job?</button>
       </div>
+    </section>
+    <section class="footer">
+      <p>&copy; 2025 Jonathan Emminizer. All rights reserved.</p>
     </section>
   </div>
 </template>
@@ -209,19 +213,19 @@ export default defineComponent({
 }
 
 .contact {
-  position: sticky;
-  bottom: 20px; /* Positioned slightly above the bottom of the screen */
-  left: 50%;
-  transform: translateX(-50%); /* Center horizontally */
+  position: sticky; /* Changed from sticky to fixed for consistent positioning */
+  bottom: 10px; /* Adjusted to ensure it stays fully visible */
+  left: 10px; /* Added left positioning for mobile responsiveness */
+  right: 10px; /* Added right positioning for mobile responsiveness */
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
   text-align: center;
-  padding: 15px 20px; /* Adjusted padding for a compact look */
+  padding: 15px 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 20px; /* Rounded corners */
-  max-width: 90%; /* Limit the width */
-  width: 400px; /* Fixed width for consistency */
-  z-index: 1000; /* Ensure it stays above other elements */
+  border-radius: 20px;
+  max-width: 400px; /* Limit the width for larger screens */
+  margin: 0 auto; /* Center horizontally on larger screens */
+  z-index: 1000;
 }
 
 .contact h2 {
@@ -231,11 +235,14 @@ export default defineComponent({
 
 .contact-buttons {
   display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
   justify-content: center;
   gap: 10px;
 }
 
 .contact-buttons button {
+  flex: 1 1 auto; /* Allow buttons to resize on smaller screens */
+  min-width: 100px; /* Set a minimum width for buttons */
   background-color: white;
   color: #2575fc;
   border: none;
@@ -250,4 +257,16 @@ export default defineComponent({
   background-color: #6a11cb;
   color: white;
 }
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+
 </style>
