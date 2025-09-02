@@ -3,6 +3,7 @@
     <header class="header">
       <h1>Jonathan Emminizer</h1>
       <p>Backend Developer | Software Engineer</p>
+      <p>jonathan@emminizer.dev</p>
     </header>
     <section class="about-me">
       <h2>About Me</h2>
@@ -48,7 +49,7 @@
     <section class="contact">
       <h2>Contact Me</h2>
       <div class="contact-buttons">
-        <button @click="openLink('mailto:jonathan.emminizer@yahoo.com')">Email Me</button>
+        <button @click="openLink('mailto:jonathan@emminizer.dev')">Email Me</button>
         <button @click="openLink('https://linkedin.com/in/jemminiz')">LinkedIn</button>
         <button @click="openLink('https://github.com/jemminiz')">GitHub</button>
         <button @click="openLink('https://www.fiverr.com/jemminiz/help-bring-your-application-to-life')">Have a Job?</button>
