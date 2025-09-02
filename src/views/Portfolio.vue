@@ -88,13 +88,15 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
   min-height: 100vh;
   opacity: 0; /* Start hidden */
   animation: fadeIn 1s ease-in-out forwards; /* Fade-in animation */
 }
 
+body {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
