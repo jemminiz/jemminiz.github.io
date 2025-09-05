@@ -12,6 +12,12 @@ const routes = [
     name: 'Portfolio',
     component: () => import('@/views/Portfolio.vue'),
   },
+  {
+    path: '/resume',
+    name: 'Resume',
+    component: () => import('@/views/Resume.vue'),
+    meta: { title: 'Resume' },
+  },
 ];
 
 const router = createRouter({
