@@ -286,7 +286,14 @@ export default defineComponent({
 </style>
 
 <style>
+html {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    min-height: 100%;
+    overscroll-behavior: none;
+    background-attachment: fixed;
+}
 body {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: transparent;
+    margin: 0;
 }
 </style>
