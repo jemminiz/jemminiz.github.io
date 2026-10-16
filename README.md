@@ -16,4 +16,4 @@ npm run build    # type-checks, then writes static files to dist/
 
 ## Deploying
 
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to GitHub Pages. In the repo settings, **Pages → Build and deployment → Source** must be set to **GitHub Actions**.
+Cloudflare Pages (project `portfolio-emminizer`) builds every push with `npm run build` and serves `dist/`. Pull requests get preview deployments. The Node version comes from `.node-version`.
