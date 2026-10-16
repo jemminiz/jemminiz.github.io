@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* Palette: a shell theme. Light is "paper", dark is a blue-black terminal. */
+:root {
+  --bg: #f5f4ef;
+  --surface: #ebe9e2;
+  --line: #d6d3c9;
+  --fg: #1d2127;
+  --muted: #62666f;
+  --kw: #2c5bc9;
+  --str: #8a5a00;
+  --ok: #217a45;
+  --warn: #a8461f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --line: #2a303b; --fg: #d9dee7; --muted: #7d8595;
+    --kw: #82a8ff; --str: #e4b363; --ok: #7bd39a; --warn: #f0937a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --line: #2a303b; --fg: #d9dee7; --muted: #7d8595;
+  --kw: #82a8ff; --str: #e4b363; --ok: #7bd39a; --warn: #f0937a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-kw: var(--kw);
+  --color-str: var(--str);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+  body { @apply bg-bg text-fg font-sans antialiased; line-height: 1.65; }
+  a { @apply text-kw underline-offset-3; }
+  :focus-visible { outline: 2px solid var(--kw); outline-offset: 2px; }
+  kbd {
+    @apply font-mono text-[11px] text-fg bg-bg border border-line rounded px-1.5;
+    border-bottom-width: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+@utility caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 4px;
+  vertical-align: -0.12em;
+  background: var(--kw);
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }

@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Prompt from '@/components/Prompt.astro';
+import CopyButton from '@/components/CopyButton.vue';
+import Shell from '@/components/Shell.vue';
+import { site } from '@/lib/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const robots = (await getCollection('robots')).sort((a, b) => a.data.order - b.data.order);
+
+const experience = [
+  { when: 'now', title: 'B.S. Computer Science, University of Maryland', detail: 'Object-oriented programming, data structures, and a lot of side projects.' },
+  { when: 'now', title: 'Developer, Open Sourcery @ UMD', detail: 'Student-built open-source tools and campus apps.' },
+  { when: '2022 – now', title: 'Maintainer, EZ-Robotics', detail: 'Helped maintain EZ-Template, a C++ drive template used by VEX teams worldwide.' },
+  { when: '2023 – 2025', title: 'Programmer, VEX 4303Z and FRC 4472 SuperNOVA', detail: 'Competition robot code in C++ and Java, and the SPOT scouting network.' },
+];
+
+const statusStyle = {
+  building: 'text-str',
+  active: 'text-ok',
+  retired: 'text-muted',
+} as const;
+
+const links = [
+  { label: 'github', href: site.github, text: 'github.com/jemminiz' },
+  { label: 'linkedin', href: site.linkedin, text: 'linkedin.com/in/jemminiz' },
+  { label: 'hire', href: site.hire, text: 'fiverr.com/jemminiz' },
+];
+---
+<Base>
+  <section id="about">
+    <Prompt cmd="whoami" />
+    <h1 class="mb-2.5 font-mono text-[clamp(30px,6vw,48px)] leading-[1.1] font-semibold tracking-tight text-balance">
+      Jonathan Emminizer<span class="caret" aria-hidden="true"></span>
+    </h1>
+    <p class="mb-5.5 font-mono text-sm text-muted">
+      backend developer · <span class="text-str">robotics</span> · CS @ University of Maryland
+    </p>
+    <p class="mb-5.5 max-w-[62ch]">
+      I like the layer where software meets hardware: APIs and backends, control code for competition robots,
+      and the tooling that keeps a team's codebase usable. I'm from Virginia, and when I'm not at a terminal
+      I'm building combat robots, playing games, or travelling.
+    </p>
+    <p class="font-mono text-[13px] text-muted">
+      Tip: press <kbd>/</kbd> or <kbd>Ctrl</kbd> <kbd>K</kbd> to jump anywhere, or type at the prompt at the bottom.
+    </p>
+  </section>
+
+  <section id="projects">
+    <Prompt cmd="ls -l" arg="projects/" />
+    <div class="grid gap-0.5 font-mono text-sm">
+      {projects.map((p) => (
+        <a
+          href={p.data.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="grid grid-cols-[1fr_auto] gap-x-4 rounded-md p-2.5 text-fg no-underline hover:bg-surface sm:grid-cols-[92px_48px_1fr]"
+        >
+          <span class="hidden text-muted sm:inline">drwxr-xr-x</span>
+          <span class="col-start-2 row-start-1 text-muted tabular-nums sm:col-start-auto sm:row-start-auto">{p.data.year}</span>
+          <span class="col-start-1 row-start-1 font-medium text-kw after:text-muted after:content-['/'] sm:col-start-auto sm:row-start-auto">{p.data.name}</span>
+          <span class="col-span-2 font-sans text-[15px] text-muted sm:col-span-1 sm:col-start-3">{p.body}</span>
+          <span class="col-span-2 text-xs text-str sm:col-span-1 sm:col-start-3">{p.data.stack.join(' · ')}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section id="robots">
+    <Prompt cmd="cat" arg="robots/*.log" />
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {robots.map((r) => (
+        <li class="rounded-lg border border-line p-4">
+          <div class="mb-1 flex items-baseline justify-between gap-3 font-mono">
+            <h3 class="text-base font-semibold">{r.data.name}</h3>
+            <span class={`text-xs uppercase tracking-wider ${statusStyle[r.data.status]}`}>[{r.data.status}]</span>
+          </div>
+          <p class="mb-1.5 font-mono text-xs text-str">{r.data.weapon.toLowerCase()}</p>
+          <p class="text-[15px] text-muted">{r.body}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="experience">
+    <Prompt cmd="tail" arg="experience.log" />
+    <ol class="grid gap-3.5 font-mono text-sm">
+      {experience.map((e) => (
+        <li class="grid gap-1 sm:grid-cols-[112px_1fr] sm:gap-4">
+          <span class="text-muted tabular-nums">{e.when}</span>
+          <span class="min-w-0">
+            <span class="text-ok">[INFO]</span> <b class="font-medium">{e.title}</b>
+            <span class="block font-sans text-[15px] text-muted">{e.detail}</span>
+          </span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section id="contact">
+    <Prompt cmd="contact" arg="--list" />
+    <dl class="grid gap-x-4 gap-y-2 font-mono text-sm sm:grid-cols-[110px_1fr]">
+      <dt class="text-muted">email</dt>
+      <dd class="mb-2 flex flex-wrap items-center gap-2.5 break-all sm:mb-0">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <CopyButton client:visible text={site.email} />
+      </dd>
+      {links.map((l) => (
+        <>
+          <dt class="text-muted">{l.label}</dt>
+          <dd class="mb-2 break-all sm:mb-0"><a href={l.href} target="_blank" rel="noopener noreferrer">{l.text}</a></dd>
+        </>
+      ))}
+    </dl>
+  </section>
+
+  <section id="shell" aria-label="Interactive prompt">
+    <Prompt cmd="help" />
+    <Shell
+      client:visible
+      projects={projects.map((p) => ({ name: p.data.name, url: p.data.url, stack: p.data.stack }))}
+      robots={robots.map((r) => ({ name: r.data.name, weapon: r.data.weapon, status: r.data.status }))}
+    />
+  </section>
+</Base>

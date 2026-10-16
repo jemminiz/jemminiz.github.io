@@ -1,0 +1,66 @@
+---
+import '@/styles/global.css';
+import { getCollection } from 'astro:content';
+import CommandPalette from '@/components/CommandPalette.vue';
+import { site } from '@/lib/site';
+
+interface Props { title?: string; description?: string; path?: string }
+const {
+  title = site.name,
+  description = 'Jonathan Emminizer: backend developer, CS student at the University of Maryland, and combat robot builder.',
+  path = '~',
+} = Astro.props;
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((p) => ({ name: p.data.name, url: p.data.url, stack: p.data.stack }));
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-30 focus:bg-bg focus:p-2">Skip to content</a>
+    <header class="sticky top-0 z-10 border-b border-line bg-bg">
+      <div class="mx-auto flex max-w-[780px] items-center justify-between gap-3 px-4 py-2.5">
+        <a href="/" class="font-mono text-[13px] text-muted no-underline">
+          <b class="font-medium text-fg">jonathan</b>@emminizer.dev:{path}
+        </a>
+        <CommandPalette client:idle projects={projects} />
+      </div>
+    </header>
+
+    <main id="main" class="mx-auto grid max-w-[780px] gap-13 px-4 pt-12 pb-6">
+      <slot />
+    </main>
+
+    <footer class="mx-auto max-w-[780px] px-4">
+      <div class="flex flex-wrap justify-between gap-2 border-t border-line pt-6 pb-10 font-mono text-xs text-muted">
+        <span>© {new Date().getFullYear()} {site.name}</span>
+        <span>built with astro · vue · tailwind</span>
+      </div>
+    </footer>
+  </body>
+</html>

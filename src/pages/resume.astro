@@ -1,0 +1,54 @@
+---
+import Base from '@/layouts/Base.astro';
+import Prompt from '@/components/Prompt.astro';
+
+const skills = [
+  { title: 'Backend development', detail: 'Built a budgeting app with a MongoDB backend, starting from a Rust-based mock backend.' },
+  { title: 'Software engineering', detail: 'Helped maintain a VEX Robotics template used worldwide, and contributed to a scouting app that let my high school robotics team track more data more accurately.' },
+  { title: 'API design', detail: 'Designed APIs for dynamic budgeting features, including categories, tags and drag-and-drop cards.' },
+  { title: 'Databases', detail: 'MongoDB, SQL, and data modeling for efficient retrieval and storage.' },
+  { title: 'Version control', detail: 'Git, GitHub and GitLab for collaboration and project history.' },
+  { title: 'Agile', detail: 'Iterated on features in a personal budgeting app, prioritizing by testing and user needs.' },
+];
+
+const languages = [
+  { name: 'C++', detail: 'My most familiar language: years of maintaining a VEX Robotics template and writing competition robot code.' },
+  { name: 'Java', detail: 'Coursework and personal projects, including object-oriented programming and data structures.' },
+  { name: 'Python', detail: 'Scripting, automation, data analysis and academic projects.' },
+  { name: 'TypeScript', detail: 'Used extensively in a personal budgeting app.' },
+  { name: 'JavaScript', detail: 'Interactive front-end features and integration with backend services.' },
+  { name: 'Rust', detail: 'Built a mock backend for a budgeting app.' },
+  { name: 'HTML / CSS', detail: 'Responsive layouts and modern web standards.' },
+];
+---
+<Base title="Resume · Jonathan Emminizer" path="~/resume">
+  <section>
+    <Prompt cmd="cat" arg="resume.md" />
+    <h1 class="mb-2 font-mono text-3xl font-semibold tracking-tight">Resume</h1>
+    <p class="font-mono text-sm text-muted">backend developer · software engineer · <a href="/">back to ~</a></p>
+  </section>
+
+  <section>
+    <h2 class="mb-4 font-mono text-sm text-str">## what I'm good at</h2>
+    <dl class="grid gap-4">
+      {skills.map((s) => (
+        <div>
+          <dt class="font-mono text-sm font-medium">{s.title}</dt>
+          <dd class="max-w-[65ch] text-[15px] text-muted">{s.detail}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section>
+    <h2 class="mb-4 font-mono text-sm text-str">## languages</h2>
+    <dl class="grid gap-4">
+      {languages.map((l) => (
+        <div class="grid gap-1 sm:grid-cols-[112px_1fr] sm:gap-4">
+          <dt class="font-mono text-sm font-medium text-kw">{l.name}</dt>
+          <dd class="max-w-[65ch] text-[15px] text-muted">{l.detail}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+</Base>
