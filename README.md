@@ -16,4 +16,4 @@ npm run build    # type-checks, then writes static files to dist/
 
 ## Deploying
 
-Cloudflare Pages (project `portfolio-emminizer`) builds every push with `npm run build` and serves `dist/`. Pull requests get preview deployments. The Node version comes from `.node-version`.
+Cloudflare Pages (projects `portfolio-emminizer` and `jemminiz-github-io`) builds every push with `npm run build` and serves `dist/`. Pull requests get preview deployments. The Node version comes from `.node-version`.
