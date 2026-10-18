@@ -1,0 +1,11 @@
+---
+import Base from '@/layouts/Base.astro';
+import Prompt from '@/components/Prompt.astro';
+---
+<Base title="Not found · Jonathan Emminizer">
+  <section>
+    <Prompt cmd="cd" arg={'"$REQUEST_PATH"'} />
+    <h1 class="mb-3 font-mono text-2xl font-semibold">No such file or directory</h1>
+    <p class="font-mono text-sm text-muted">That page doesn't exist. <a href="/">cd ~</a></p>
+  </section>
+</Base>
