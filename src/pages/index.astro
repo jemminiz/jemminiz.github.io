@@ -1,13 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
+import { byNewestProject, byNewestRobot } from '@/lib/sort';
 import Base from '@/layouts/Base.astro';
 import Prompt from '@/components/Prompt.astro';
 import CopyButton from '@/components/CopyButton.vue';
 import Shell from '@/components/Shell.vue';
 import { site } from '@/lib/site';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const robots = (await getCollection('robots')).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects')).sort(byNewestProject);
+const robots = (await getCollection('robots')).sort(byNewestRobot);
 
 const experience = [
   { when: 'now', title: 'B.S. Computer Science, University of Maryland', detail: 'Object-oriented programming, data structures, and a lot of side projects.' },
