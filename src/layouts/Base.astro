@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import { getCollection } from 'astro:content';
+import { byNewestProject } from '@/lib/sort';
 import CommandPalette from '@/components/CommandPalette.vue';
 import { site } from '@/lib/site';
 
@@ -12,7 +13,7 @@ const {
 } = Astro.props;
 
 const projects = (await getCollection('projects'))
-  .sort((a, b) => a.data.order - b.data.order)
+  .sort(byNewestProject)
   .map((p) => ({ name: p.data.name, url: p.data.url, stack: p.data.stack }));
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
